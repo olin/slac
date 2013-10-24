@@ -15,6 +15,14 @@ Agenda and projects for October 23:
 ## Learn Skills
 
 Learn Node.js: <http://github.com/olinjs>
+* [Lesson 1: setting up your environment for node](https://github.com/olinjs/olinjs-1)
+* [Lesson 2: express & mongo](https://github.com/olinjs/olinjs-2)
+* [Lesson 3: client side JS](https://github.com/olinjs/olinjs-3)
+* [Lesson 4: css](https://github.com/olinjs/olinjs-4)
+* [Lesson 5: APIs & debugging](https://github.com/olinjs/olinjs-6)
+* [Lesson 6: twitter app homework](https://github.com/olinjs/olinjs-6-hw)
+* [Lesson 7: bootstrap](https://github.com/olinjs/olinjs-7)
+* [Lesson 8: git practice](https://github.com/olinjs/olinjs-8)
 
 Learn Android: <https://github.com/mobileproto>
 
