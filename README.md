@@ -10,6 +10,7 @@ Agenda and projects for October 23:
 * [**Launchpad:**](http://www.olinapps.com/launchpad)  a true "Olin homepage". What does that look like?
 * [**Olin Projects.com:**](http://www.olinprojects.com/projects/) How can you make this more useful? Like something every Oliner uses and every blog on the internet links to, etc.
 * [**Guess the Oliner:**](http://www.olinapps.com/directory/guess/) You can scrape high-quality images from the handbook pictures, but how? Or is there a better way to get images for every Oliner? A simpler way?
+* [**StoryQuilt:**](https://play.google.com/store/apps/details?id=com.roomates.storyquilt) Collaborative story making with barely any context? Improve + webapp.
 * **Design your own major (HALP)**! Ask Aman Kapur if he needs help.
 
 ## Learn Skills
