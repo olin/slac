@@ -1,0 +1,27 @@
+{
+  "name": "SLACsite",
+  "version": "0.1.0",
+  "description": "Olin project and event site powered by SLAC.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/olin/slac.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olin/slac/issues"
+  },
+  "homepage": "https://github.com/olin/slac",
+  "dependencies": {
+    "mongoose": "^4.0.1",
+    "body-parser": "^1.10.1",
+    "cookie-parser": "^1.3.3",
+    "express": "^4.10.6",
+    "express-handlebars": "^1.1.0",
+    "morgan": "^1.5.1"
+  }
+}
