@@ -19,9 +19,10 @@ app.set("view engine", "handlebars");
 
 if (argv.debug) {
   app.use(logger("dev"));
-  console.mainLog = console.log;
+  var log = console.log;
   console.log = function(message) {
-    console.mainlog(">>", message);
+    var args = Array.prototype.slice.call(arguments, 1)
+    log(">>", message, args.join(','));
   }
 } else {
   app.use(logger("production"));
