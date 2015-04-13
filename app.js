@@ -7,6 +7,8 @@ var exphbs = require("express-handlebars");
 var mongoose = require("mongoose");
 var argv = require('minimist')(process.argv.slice(2));
 
+var project = require("./routes/project");
+
 var app = express();
 
 var PORT = process.env.PORT || 3000;
@@ -32,6 +34,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/", function(req, res) {
   res.render("index");
 });
+
+app.use("/project", project);
 
 mongoose.connect(mongoURI);
 
