@@ -5,18 +5,18 @@ var project = express.Router();
 
 project.get("/", function(req, res) {
   projects = [
-    {projectName: "project1"},
-    {projectName: "project2"},
-    {projectName: "project3"},
-    {projectName: "project4"},
-    {projectName: "project5"}
+    {name: "project1"},
+    {name: "project2"},
+    {name: "project3"},
+    {name: "project4"},
+    {name: "project5"}
   ];
 
   res.render("projectList", {projects: projects});
 });
 
 project.get("/:id", function(req, res) {
-  project = {projectName: "project"+req.params.id};
+  project = {name: "project"+req.params.id};
   res.render("projectPage", {project: project});
 });
 
