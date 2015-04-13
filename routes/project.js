@@ -16,7 +16,6 @@ project.get("/", function(req, res) {
 });
 
 project.get("/:id", function(req, res) {
-  console.log(req.params.id);
   project = {projectName: "project"+req.params.id};
   res.render("projectPage", {project: project});
 });
