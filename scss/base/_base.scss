@@ -1,0 +1,20 @@
+* {
+  font-family: 'Montserrat', sans-serif;
+  color: palette(Black, Secondary Text);
+}
+
+html {
+
+  body {
+    padding: 0px;
+    margin: 0px;
+
+    // FIXME: Probably should make this dynamic.
+    margin-top: 80px;
+  }
+}
+
+nav {
+  border-radius: 0px;
+  @extend %sh1;
+}
