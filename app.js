@@ -17,16 +17,15 @@ var mongoURI = process.env.MONGOURI || "mongodb://localhost/slac";
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
-if (argv.debug) {
-  app.use(logger("dev"));
-  var log = console.log;
-  console.log = function(message) {
-    var args = Array.prototype.slice.call(arguments, 1)
-    log(">>", message, args.join(','));
-  };
-} else {
-  app.use(logger("production"));
-}
+// Debug Logger
+console.dlog = function(message) {
+  if (argv.debug) {
+      var args = Array.prototype.slice.call(arguments, 1)
+      console.log(">>", message, args.join(','));
+  }
+};
+
+app.use(logger(argv.debug ? "dev" : "production"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
@@ -39,7 +38,6 @@ app.get("/", function(req, res) {
 app.use("/project", project);
 
 mongoose.connect(mongoURI);
-
 app.listen(PORT, function() {
   console.log("Application running on port:", PORT);
 });
