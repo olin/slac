@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "./node_modules/node-sass/bin/node-sass -w scss/style.scss -o ./public/styles/ style.css",
-    "build": "npm run-script sass"
+    "sass": "./node_modules/node-sass/bin/node-sass -w -r ./scss/ scss/style.scss -o ./public/styles/ style.css",
+    "build": "nodemon & npm run-script sass"
   },
   "repository": {
     "type": "git",
