@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 var mongoose = require("mongoose");
+var argv = require('minimist')(process.argv.slice(2));
 
 var app = express();
 
@@ -14,7 +15,15 @@ var mongoURI = process.env.MONGOURI || "mongodb://localhost/slac";
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
-app.use(logger("dev"));
+if (argv.debug) {
+  app.use(logger("dev"));
+  console.mainLog = console.log;
+  console.log = function(message) {
+    console.mainlog(">>", message);
+  }
+} else {
+  app.use(logger("production"));
+}
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
