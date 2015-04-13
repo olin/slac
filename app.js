@@ -23,7 +23,7 @@ if (argv.debug) {
   console.log = function(message) {
     var args = Array.prototype.slice.call(arguments, 1)
     log(">>", message, args.join(','));
-  }
+  };
 } else {
   app.use(logger("production"));
 }
