@@ -62,8 +62,7 @@ project.put("/:id", function(req, res) {
         }
       })
     }
-  })
-  })
+  });
 });
 
 project.delete("/:id", function(req, res) {
