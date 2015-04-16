@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var express = require("express");
 var _ = require("lodash");
-var Project = require("../models/projects");
+var Project = require("../models/project");
 
 var project = express.Router();
 
@@ -10,14 +10,17 @@ project.get("/", function(req, res) {
     if (err) {
       res.status(500).end("Could not find projects");
     } else {
+      console.log(projects);
       res.render("projectList", {projects: projects});
     }
   })
 });
 
 project.get("/:id", function(req, res) {
-  var projectId = req.params.projectId;
+  var projectId = req.params.id;
+  console.log(projectId);
   Project.findOne({"_id": projectId}).exec(function(err, project) {
+    console.log(project);
     if (err) {
       res.status(500).end("Error finding projects");
     } else {
@@ -27,7 +30,7 @@ project.get("/:id", function(req, res) {
 });
 
 project.post("/", function(req, res) {
-  var creatorId = req.session.userId;
+  var creatorId = req.session.user._id;
   var defaultProject = {
     title: "New Project",
     coverPhoto: "defaultImage.png", //TODO: Get an image
@@ -47,7 +50,7 @@ project.post("/", function(req, res) {
 });
 
 project.put("/:id", function(req, res) {
-  var projectId = req.session.userId;
+  var projectId = req.session.user._id;
   var updatedProject = req.params.project;
   Project.findOne({"_id": projectId}, function(err, project){
     if (err) {
