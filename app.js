@@ -5,8 +5,10 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 var mongoose = require("mongoose");
+var session = require('express-session');
 var argv = require('minimist')(process.argv.slice(2));
 
+var olinAuth = require('./routes/olinAuth');
 var project = require("./routes/project");
 
 var app = express();
@@ -25,19 +27,26 @@ console.dlog = function(message) {
   }
 };
 
-app.use(logger(argv.debug ? "dev" : "production"));
+app.use(logger(argv.debug ? "dev" : "tiny"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true
+}));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", function(req, res) {
   res.render("index");
 });
 
-app.use("/project", project);
+app.use("/project", olinAuth.isAuth, project);
+app.use("/olinAuth", olinAuth);
 
 mongoose.connect(mongoURI);
 app.listen(PORT, function() {
   console.log("Application running on port:", PORT);
+  console.log("MongoURI:", mongoURI);
 });
