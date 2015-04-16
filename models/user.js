@@ -8,5 +8,6 @@ module.exports = mongoose.model("User", mongoose.Schema({
   "projects" : [{ type: mongoose.Schema.Types.ObjectId, ref: 'projects' }],
   "organizations" : [{type: mongoose.Schema.Types.ObjectId,
     ref: 'organizations'}],
+  "year": Number,
   "dateJoined" : Number    // Timestamp milliseconds long
 }));

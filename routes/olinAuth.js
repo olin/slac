@@ -18,15 +18,17 @@ router.get("/logout", function(req, res) {
 router.post("/auth", function(req, res) {
   request("http://www.olinapps.com/api/me?sessionid="+req.body.sessionid, function(err, response, body) {
     body = JSON.parse(body);
-    User.findOne({"email": body.email}, function(err, user) {
+    User.findOne({"email": body.user.email}, function(err, user) {
       if (err) {
         res.status(500).end("Error finding user");
       } else {
         if (!user) {
           user = new User({
-            name: body.email, // Parse name from this
-            email: body.email,
-            profilePhoto: "", // Get photo from OlinApps Directory
+            name: body.user.name,
+            display: body.user.nickname,
+            email: body.user.email,
+            year: body.user.year,
+            profilePhoto: "www.olinapps.com"+body.user.thumbnail,
             dateJoined: Date.now()
           });
           user.save(function(err){
@@ -49,8 +51,11 @@ router.post("/auth", function(req, res) {
 module.exports = router;
 
 module.exports.isAuth = function(req, res, next) {
-  if (req.session.user)
+  if (req.session.user) {
+    console.log(req.session.user);
     return next();
+  }
+
 
   res.redirect("/olinAuth/login");
 }

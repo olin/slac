@@ -48,4 +48,5 @@ app.use("/olinAuth", olinAuth);
 mongoose.connect(mongoURI);
 app.listen(PORT, function() {
   console.log("Application running on port:", PORT);
+  console.log("MongoURI:", mongoURI);
 });
