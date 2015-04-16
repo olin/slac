@@ -44,7 +44,7 @@ project.post("/", function(req, res) {
     if (err) {
       res.status(500).end("Error creating project");
     } else {
-      res.render("projectPage", {project: newProject});
+      res.status(200).json({"_id": newProject._id});
     }
   })
 });
