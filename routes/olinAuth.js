@@ -7,7 +7,7 @@ var User = require("../models/user");
 var router = express.Router();
 
 router.get("/login", function(req, res) {
-  res.redirect("http://www.olinapps.com/external?callback="+"http://localhost:3000/olinauth/auth");
+  res.redirect("http://www.olinapps.com/external?callback="+"http://localhost:3000/olinAuth/auth");
 })
 
 router.get("/logout", function(req, res) {
@@ -16,16 +16,16 @@ router.get("/logout", function(req, res) {
 })
 
 router.post("/auth", function(req, res) {
-  request("http://www.olinapps.com/api/me?sessionid="+req.body.sessionId, function(err, response, body) {
+  request("http://www.olinapps.com/api/me?sessionid="+req.body.sessionid, function(err, response, body) {
     body = JSON.parse(body);
-    User.findOne({"email": req.body.email}, function(err, user) {
+    User.findOne({"email": body.email}, function(err, user) {
       if (err) {
         res.status(500).end("Error finding user");
       } else {
         if (!user) {
           user = new User({
-            name: req.body.email, // Parse name from this
-            email: req.body.email,
+            name: body.email, // Parse name from this
+            email: body.email,
             profilePhoto: "", // Get photo from OlinApps Directory
             dateJoined: Date.now()
           });
