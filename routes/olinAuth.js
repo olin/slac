@@ -24,8 +24,8 @@ router.post("/auth", function(req, res) {
       } else {
         if (!user) {
           user = new User({
-            name: email, // Parse name from this
-            email: email,
+            name: req.body.email, // Parse name from this
+            email: req.body.email,
             profilePhoto: "", // Get photo from OlinApps Directory
             dateJoined: Date.now()
           });
