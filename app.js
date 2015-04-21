@@ -16,7 +16,15 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 var mongoURI = process.env.MONGOURI || "mongodb://localhost/slac";
 
-app.engine("handlebars", exphbs({defaultLayout: "main"}));
+var hbs = exphbs.create({
+  defaultLayout: "main",
+  // Specify helpers which are only registered on this instance. 
+  helpers: {
+    json: function (context) { return JSON.stringify(context); }
+  }
+});
+
+app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 // Debug Logger

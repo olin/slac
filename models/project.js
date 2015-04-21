@@ -8,7 +8,7 @@ var projectSchema = mongoose.Schema({
   "organizers": [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   "organizations" : [{type: mongoose.Schema.Types.ObjectId,
     ref: 'organizations'}],
-  "goals" : String,
+  "description" : String,
   "type" : String
 });
 
