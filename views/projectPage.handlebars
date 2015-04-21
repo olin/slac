@@ -1,3 +1,26 @@
 <div class="project-container">
-  {{project.title}}
+
+  {{!-- These are toggled buttons. --}}
+  <button class="button-to-edit">Edit here!</button>
+  <button class="button-save-changes" style="display:none;">Click here to save!</button>
+
+  <div class="project-cover-image"></div>
+  
+  <div class="project-title can-edit-text">{{project.title}}</div>
+  
+  <div class="project-members"></div>
+  
+  <div class="project-description can-edit-text">{{project.description}}</div>
+  
+  <div class="project-gallery"></div>
+  
+  <div class="project-calendar"></div>
+  
+  <div class="project-discussion-board">
+    <div id="disqus_thread"></div>
+  </div>
+
 </div>
+
+<script src="/javascripts/disqus.js"></script>
+<script src="/javascripts/project.js"></script>

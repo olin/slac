@@ -33,7 +33,7 @@ project.post("/", function(req, res) {
   var creatorId = req.session.user._id;
   var defaultProject = {
     title: "New Project",
-    coverPhoto: "defaultImage.png", //TODO: Get an image
+    coverPhoto: "defaultImage.png", //TODO: Get an image.
     goals: "The goal of this project is to tell you what you should type here.",
     type: "public",
     organizers: [creatorId],
