@@ -4,3 +4,7 @@ $("#create-project").click(function(e) {
         window.location = "/project/" + data._id;
     });
 });
+
+$(".project-item").click(function (e) {
+    $.get("/project/e.target.attr['id']");
+})
