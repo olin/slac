@@ -5,17 +5,17 @@
   <button class="button-save-changes" style="display:none;">Click here to save!</button>
 
   <div id="project-cover-image"></div>
-  
+
   <div id="project-title" class="can-edit-text">{{project.title}}</div>
-  
+
   <div id="project-members"></div>
-  
+
   <div id="project-description" class="can-edit-text">{{{project.description}}}</div>
-  
+
   <div id="project-gallery"></div>
-  
+
   <div id="project-calendar"></div>
-  
+
   <div id="project-discussion-board">
     <div id="disqus_thread"></div>
   </div>
@@ -24,7 +24,7 @@
 
 <script type="text/javascript">
 
-  /*Sort of a janky way of doing things, but I am getting our JSON object this 
+  /*Sort of a janky way of doing things, but I am getting our JSON object this
   way through Handlebars.*/
   var project = {{{json project}}};
 

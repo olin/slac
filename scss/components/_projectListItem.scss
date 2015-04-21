@@ -1,17 +1,29 @@
+#create-project {
+    position:fixed;
+    bottom: 5%;
+    right: 5%;
+    z-index: 100;
+}
+
 .project-list-container {
     width: 100%;
 }
 
 .project-card {
     width: 60%;
+    min-width: 400px;
     margin: 20px auto 0 auto;
     border: 1px solid black;
 }
 
+.cover-container {
+    position: relative;
+}
+
 .project-cover {
     position:relative;
-    height: 200px;
-    background-size: 100% 100%;
+    width: 100%;
+    height: auto;
     vertical-align: bottom;
 }
 
