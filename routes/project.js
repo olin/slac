@@ -3,6 +3,8 @@ var express = require("express");
 var _ = require("lodash");
 var Project = require("../models/project");
 
+var ObjectId = mongoose.Types.ObjectId;
+
 var project = express.Router();
 
 project.get("/", function(req, res) {
@@ -50,22 +52,21 @@ project.post("/", function(req, res) {
 });
 
 project.put("/:id", function(req, res) {
-  var projectId = req.session.user._id;
-  var updatedProject = req.params.project;
-  Project.findOne({"_id": projectId}, function(err, project){
-    if (err) {
-      res.status(500).end("Error finding projects");
-    } else {
-      _.assign(project, updatedProject);
-      project.save(function(err) {
-        if (err) {
-          res.status(500).end("Error updating project");
-        } else {
-          res.render("projectPage", {project: project});
-        }
-      })
-    }
-  });
+  var updatedProject = req.body;
+  var projectId = updatedProject._id;
+
+  Project.findOneAndUpdate(
+    {"_id": projectId}, 
+    updatedProject,
+    function(err, project){
+      console.log(project);
+
+      if (err) {
+        res.status(500).end("Error finding projects");
+      }
+
+      res.status(200).end();
+    });
 });
 
 project.delete("/:id", function(req, res) {

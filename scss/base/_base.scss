@@ -18,3 +18,7 @@ nav {
   border-radius: 0px;
   @extend %sh1;
 }
+
+[contenteditable="true"] {
+  border: 1px dotted gray;
+}
