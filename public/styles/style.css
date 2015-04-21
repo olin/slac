@@ -16,3 +16,6 @@ html body {
 
 nav {
   border-radius: 0px; }
+
+[contenteditable="true"] {
+  border: 1px dotted gray; }
