@@ -1,5 +1,6 @@
 * {
   font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
 }
 
 html {
@@ -16,6 +17,13 @@ html {
 
     text-align:center;
   }
+
+  @include tablet {
+    body {
+      width: 95%;
+    }
+  }
+
 }
 
 nav {
@@ -24,5 +32,5 @@ nav {
 }
 
 [contenteditable="true"] {
-  border: 1px dotted gray;
+  border: 4px dotted palette(Red, 500);
 }

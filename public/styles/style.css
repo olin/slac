@@ -42,7 +42,8 @@ div#project-calendar > #wrapper iframe {
   height: 100%; }
 
 * {
-  font-family: 'Montserrat', sans-serif; }
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box; }
 
 html {
   color: rgba(0, 0, 0, 0.54); }
@@ -54,12 +55,15 @@ html {
     margin-right: auto;
     width: 70%;
     text-align: center; }
+  @media only screen and (max-width: 768px) {
+    html body {
+      width: 95%; } }
 
 nav {
   border-radius: 0px; }
 
 [contenteditable="true"] {
-  border: 1px dotted gray; }
+  border: 4px dotted #F44336; }
 
 button#button-to-edit, button#button-save-changes {
   display: block;
