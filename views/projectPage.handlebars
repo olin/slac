@@ -1,12 +1,14 @@
-<div class="project-container">
+<div id="project-container">
 
   {{!-- These are toggled buttons. --}}
   <button class="button-to-edit">Edit here!</button>
   <button class="button-save-changes" style="display:none;">Click here to save!</button>
 
-  <div id="project-cover-image"></div>
-  
-  <div id="project-title" class="can-edit-text">{{project.title}}</div>
+  <div id="project-cover-image">
+    <div id="project-title" class="can-edit-text">{{project.title}}</div>
+    {{!-- TODO: Change this into uploaded dynamic canvas. --}}
+    <img src="http://lorempixel.com/1200/400/"></img>
+  </div>
   
   <div id="project-members"></div>
   

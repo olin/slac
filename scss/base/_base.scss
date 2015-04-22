@@ -7,12 +7,14 @@ html {
 
   body {
     padding: 0px;
-    margin: 0px;
 
-    // FIXME: Probably should make this dynamic.
+    margin: 0px;
     margin-top: 80px;
-    @extend %center;
+    margin-left: auto;
+    margin-right: auto;
     width: 70%;
+
+    text-align:center;
   }
 }
 

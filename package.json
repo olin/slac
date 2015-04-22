@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "npm-watch",
     "sass": "./node_modules/node-sass/bin/node-sass -w -r scss/ -o ./public/styles/ style.css",
     "build": "nodemon & npm run-script sass"
   },
@@ -31,6 +32,7 @@
     "request": "^2.55.0"
   },
   "devDependencies": {
+    "catw": "^1.0.0",
     "node-sass": "^2.1.1"
   }
 }

@@ -1,1 +1,27 @@
-// button#
+div#project-container {
+  margin:0px auto;
+  text-align:left;
+}
+
+div#project-cover-image {
+  width: 100%;
+  height: 300px;
+
+  @extend %centerImageWrapper;
+
+  & > img {
+    @extend %centerImage;
+  }
+}
+
+div#project-title {
+  font-size: 32pt;
+  background-color: $darkGlassColor;
+  color: white;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  position: absolute;
+  z-index: 9;
+  bottom: 0;
+}
