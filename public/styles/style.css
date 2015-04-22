@@ -5,6 +5,10 @@
 nav {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
+html body {
+  margin-left: auto;
+  margin-right: auto; }
+
 * {
   font-family: 'Montserrat', sans-serif;
   color: rgba(0, 0, 0, 0.54); }
@@ -12,7 +16,8 @@ nav {
 html body {
   padding: 0px;
   margin: 0px;
-  margin-top: 80px; }
+  margin-top: 80px;
+  width: 70%; }
 
 nav {
   border-radius: 0px; }

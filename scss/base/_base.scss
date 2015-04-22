@@ -11,6 +11,8 @@ html {
 
     // FIXME: Probably should make this dynamic.
     margin-top: 80px;
+    @extend %center;
+    width: 70%;
   }
 }
 
