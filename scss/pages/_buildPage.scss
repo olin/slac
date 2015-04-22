@@ -3,25 +3,99 @@ div#project-container {
   text-align:left;
 }
 
+%edit-save-button {
+  position: absolute;
+  z-index: 9;
+  right: 20px;
+  top: 20px;
+
+  @extend %sh2;
+
+  &:hover {
+    @extend %sh4;
+  }
+} 
+
+button#button-to-edit {
+  @extend %round-button;
+  @extend %edit-save-button;
+
+  background-color: palette(Red);
+  color: white;
+}
+
+button#button-save-changes {
+  @extend %round-button;
+  @extend %edit-save-button;
+
+  background-color: palette(Green);
+  color: white;
+}
+
 div#project-cover-image {
   width: 100%;
   height: 300px;
 
   @extend %centerImageWrapper;
+  @extend %sh1;
 
   & > img {
     @extend %centerImage;
   }
 }
 
+%textPadding {
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 div#project-title {
   font-size: 32pt;
   background-color: $darkGlassColor;
   color: white;
-  padding: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
+  
+  @extend %textPadding;
+
   position: absolute;
   z-index: 9;
   bottom: 0;
+
+  @extend %sh1;
+}
+
+.contentWrapper {
+  padding: 15px;
+  margin-bottom: 20px;
+  @extend %sh1;
+}
+
+div#project-members {
+  background-color: palette(Grey);
+  height: 100px;
+  @extend %sh1;
+}
+
+section.sectionTitle {
+  font-size: 16pt;
+  background-color: $darkGlassColor;
+  color: white;
+  display: inline-block;
+  @extend %textPadding;
+  @extend %sh1;
+}
+
+div#project-description {
+  margin-top: 20px;
+
+  & > article {
+    font-weight: 14pt;
+  }
+}
+
+div#project-calendar {  
+  & > #wrapper {
+    @extend %responsive-iframe-container;
+    @extend %sh1;
+  }
 }
