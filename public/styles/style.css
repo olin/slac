@@ -48,6 +48,7 @@ div#project-calendar > #wrapper iframe {
 html {
   color: rgba(0, 0, 0, 0.54); }
   html body {
+    background-color: #ececec;
     padding: 0px;
     margin: 0px;
     margin-top: 80px;
@@ -81,6 +82,47 @@ button#button-to-edit, button#button-save-changes {
     -webkit-transform: rotate(10deg);
     transform: rotate(10deg);
     cursor: pointer; }
+
+.navbar-default {
+  background-color: #1976D2;
+  border-color: #1E88E5; }
+  .navbar-default .navbar-brand {
+    color: #ffffff; }
+    .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+      color: #ffffff; }
+  .navbar-default .navbar-text {
+    color: #ffffff; }
+  .navbar-default .navbar-nav > li > a {
+    color: #ffffff; }
+    .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+      color: #ffffff; }
+  .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color: #1E88E5; }
+  .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    color: #ffffff;
+    background-color: #1E88E5; }
+  .navbar-default .navbar-toggle {
+    border-color: #1E88E5; }
+    .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+      background-color: #1E88E5; }
+    .navbar-default .navbar-toggle .icon-bar {
+      background-color: #ffffff; }
+  .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #ffffff; }
+  .navbar-default .navbar-link {
+    color: #ffffff; }
+    .navbar-default .navbar-link:hover {
+      color: #ffffff; }
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #ffffff; }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+      color: #ffffff; }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ffffff;
+    background-color: #1E88E5; } }
 
 div#project-container {
   margin: 0px auto;
@@ -118,6 +160,7 @@ div#project-title {
   bottom: 0; }
 
 .contentWrapper {
+  background-color: white;
   padding: 15px;
   margin-bottom: 20px; }
 
