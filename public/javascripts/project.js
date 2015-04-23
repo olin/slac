@@ -17,38 +17,53 @@ $("#button-to-edit").click(function() {
   $canEditTextElements.each(function() {
     $(this).attr('contenteditable','true');
   });
-  
+
+  // Show hidden fields
+  $(".show-on-edit").toggleClass("hidden");
+
   // Toggle the button that changes the page into editing mode.
-  $("#button-to-edit").css("display", "none");
-  $("#button-save-changes").css("display", "inline-block");
-  
-  $("#button-save-changes").click(function(){
+  $("#button-to-edit").toggleClass("hidden");
+  $("#button-save-changes").toggleClass("hidden");
+});
 
-    // Disables warning for edit mode.
-    window.onbeforeunload = null;
+$("#button-save-changes").click(function(){
 
-    // Toggles back the edit button.
-    // TODO: Potentially remove if the page information is re-rendered.
-    $("#button-to-edit").css("display", "inline-block");
-    $("#button-save-changes").css("display", "none");
+  // Disables warning for edit mode.
+  window.onbeforeunload = null;
 
-    // Turn off edit mode for the view.
-    $canEditTextElements.each(function() {
-      $(this).attr('contenteditable','false');
-    });
+  // Fetch all the DOM elements with text that can be edited.
+  var $canEditTextElements = $(".can-edit-text");
 
-    // Package changed information.
-    var updatedProject = project;
-    updatedProject.title = $('#project-title').text();
-    updatedProject.description = $('#project-description > article').html();
+  // Toggles back the edit button.
+  // TODO: Potentially remove if the page information is re-rendered.
+  $("#button-to-edit").toggleClass("hidden");
+  $("#button-save-changes").toggleClass("hidden");
 
-    // Send information over.
-    // TODO: If there is an error saving, we should reflect that here.
-    var url = "/project/" + project._id;
-    $.ajax({
-      url: url,
-      type: 'PUT',
-      data: updatedProject
-    });
+  // Turn off edit mode for the view.
+  $canEditTextElements.each(function() {
+    $(this).attr('contenteditable','false');
   });
+
+  // Hide hidden fields
+  $(".show-on-edit").toggleClass("hidden");
+
+  // Package changed information.
+  var updatedProject = project;
+  updatedProject.title = $('#project-title').text();
+  updatedProject.description = $('#project-description > article').html();
+  
+  $(".show-on-edit").each(function(index) {
+    var field = $(this).data("field");
+    updatedProject[field] = $(this).text();
+  })
+
+  // Send information over.
+  // TODO: If there is an error saving, we should reflect that here.
+  var url = "/project/" + project._id;
+  $.ajax({
+    url: url,
+    type: 'PUT',
+    data: updatedProject
+  });
+  location.reload();
 });

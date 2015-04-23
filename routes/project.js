@@ -35,9 +35,11 @@ project.post("/", function(req, res) {
   var creatorId = req.session.user._id;
   var defaultProject = {
     title: "New Project",
-    coverPhoto: "defaultImage.png", //TODO: Get an image.
+    coverPhoto: "http://lorempixel.com/1200/400/",
     goals: "The goal of this project is to tell you what you should type here.",
+    galleryId: "72157623755425292", 
     type: "public",
+    calendarLink: "https://www.google.com/calendar/embed?src=4d8ao8d70avubj73u2ljehoq5o%40group.calendar.google.com&ctz=America/New_York",
     organizers: [creatorId],
     dateCreated: Date.now()
   }
