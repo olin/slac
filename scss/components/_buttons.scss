@@ -1,0 +1,21 @@
+%round-button {
+  display:block;
+  width: $buttonSize;
+  height: $buttonSize;
+  border: 0px;
+  border-radius: 50%;
+  color: white;
+  text-align:center;
+  text-decoration:none;
+  font-size:25px;
+  margin-bottom: 20px;
+  transition: 0.1s ease-in-out;
+  @extend %sh1;
+
+  &:hover {
+    -webkit-transform: rotate(10deg);
+    transform: rotate(10deg);
+    cursor: pointer;
+    @extend %sh2;
+  }
+}

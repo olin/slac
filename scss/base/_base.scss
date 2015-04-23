@@ -1,17 +1,30 @@
 * {
   font-family: 'Montserrat', sans-serif;
-  color: palette(Black, Secondary Text);
+  box-sizing: border-box;
 }
 
 html {
+  color: palette(Black, Secondary Text);
 
   body {
+    background-color: #ececec;
     padding: 0px;
-    margin: 0px;
 
-    // FIXME: Probably should make this dynamic.
+    margin: 0px;
     margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+
+    text-align:center;
   }
+
+  @include tablet {
+    body {
+      width: 95%;
+    }
+  }
+
 }
 
 nav {
@@ -20,5 +33,5 @@ nav {
 }
 
 [contenteditable="true"] {
-  border: 1px dotted gray;
+  border: 4px dotted palette(Red, 500);
 }

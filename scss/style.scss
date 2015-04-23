@@ -1,11 +1,21 @@
 // Don't forget to import your newly creating .scss files here.
 // Don't include the .scss in the end.
 
-// Helpers.
+// Vendors.
 @import "vendors/palette";
 @import "vendors/shadows";
 
-// Components.
-@import "components/buildPage";
+// Helpers.
+@import "helpers/variables";
+@import "helpers/helpers";
+@import "helpers/mixins";
 
+// Base.
 @import "base/base";
+
+// Components.
+@import "components/buttons";
+@import "components/navbar";
+
+// Pages.
+@import "pages/buildPage";
