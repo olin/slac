@@ -4,8 +4,8 @@ var projectSchema = mongoose.Schema({
   "dateCreated": Number,    // Timestamp milliseconds long
   "title": String,
   "coverPhoto": String,     // Image Url
-  "members": [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }],
-  "organizers": [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }],
+  "members": [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  "organizers": [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   "organizations": [{type: mongoose.Schema.Types.ObjectId,
     ref: 'organizations'}],
   "galleryId": String,
