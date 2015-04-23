@@ -11,14 +11,14 @@
     <img src="{{project.coverPhoto}}"></img>
 
   </div>
-  
+
   <div id="project-members">Under Construction: Project Members</div>
-  
+
   <div id="project-description">
     <section class="sectionTitle">Description and Goals</section>
     <article class="can-edit-text contentWrapper">{{{project.description}}}</article>
   </div>
-  
+
   <div id="project-gallery">
     <section class="sectionTitle">Gallery</section>
 
@@ -28,7 +28,7 @@
       </iframe>
     </div>
   </div>
-  
+
   <div id="project-calendar">
     <section class="sectionTitle">Calendar</section>
 
@@ -37,7 +37,7 @@
       <iframe id="calendar-iframe" src="{{project.calendarLink}}" style="border: 0" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
-  
+
   <div id="project-discussion-board">
     <section class="sectionTitle">Discussion</section>
     <div class="contentWrapper" id="disqus_thread"></div>
@@ -47,7 +47,7 @@
 
 <script type="text/javascript">
 
-  /*Sort of a janky way of doing things, but I am getting our JSON object this 
+  /*Sort of a janky way of doing things, but I am getting our JSON object this
   way through Handlebars.*/
   var project = {{{json project}}};
 

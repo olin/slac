@@ -2,17 +2,17 @@ var mongoose = require("mongoose");
 var express = require("express");
 var _ = require("lodash");
 var Project = require("../models/project");
+var User = require("../models/user");
 
 var ObjectId = mongoose.Types.ObjectId;
 
 var project = express.Router();
 
 project.get("/", function(req, res) {
-  Project.find().exec(function(err, projects) {
+  Project.find().populate("members").exec(function(err, projects) {
     if (err) {
       res.status(500).end("Could not find projects");
     } else {
-      console.log(projects);
       res.render("projectList", {projects: projects});
     }
   })
@@ -20,9 +20,7 @@ project.get("/", function(req, res) {
 
 project.get("/:id", function(req, res) {
   var projectId = req.params.id;
-  console.log(projectId);
   Project.findOne({"_id": projectId}).exec(function(err, project) {
-    console.log(project);
     if (err) {
       res.status(500).end("Error finding projects");
     } else {
@@ -39,7 +37,8 @@ project.post("/", function(req, res) {
     goals: "The goal of this project is to tell you what you should type here.",
     galleryId: "72157623755425292", 
     type: "public",
-    calendarLink: "https://www.google.com/calendar/embed?src=4d8ao8d70avubj73u2ljehoq5o%40group.calendar.google.com&ctz=America/New_York",
+    calendarLink: "https://www.google.com/calendar/embed?src=4d8ao8d70avubj73u2ljehoq5o%40group.calendar.google.com&ctz=America/New_York&mode=AGENDA",
+    members: [creatorId],
     organizers: [creatorId],
     dateCreated: Date.now()
   }
@@ -58,7 +57,7 @@ project.put("/:id", function(req, res) {
   var projectId = updatedProject._id;
 
   Project.findOneAndUpdate(
-    {"_id": projectId}, 
+    {"_id": projectId},
     updatedProject,
     function(err, project){
       console.log(project);

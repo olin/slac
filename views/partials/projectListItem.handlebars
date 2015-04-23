@@ -1,3 +1,13 @@
-<div class="project-list-item">
-  <a href="{{_id}}">{{title}}</a>
-</div>
+<a href="/project/{{_id}}">
+  <div class="project-card">
+    <div class="cover-container">
+      <img class="project-cover" src="{{coverPhoto}}">
+      <div class="project-title">{{title}}</div>
+    </div>
+    <div class="project-info">
+      {{#each members}}
+      <img class="member-icon" src="http://{{profilePhoto}}"/>
+      {{/each}}
+    </div>
+  </div>
+</a>
