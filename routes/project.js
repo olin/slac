@@ -2,17 +2,17 @@ var mongoose = require("mongoose");
 var express = require("express");
 var _ = require("lodash");
 var Project = require("../models/project");
+var User = require("../models/user");
 
 var ObjectId = mongoose.Types.ObjectId;
 
 var project = express.Router();
 
 project.get("/", function(req, res) {
-  Project.find().exec(function(err, projects) {
+  Project.find().populate("members").exec(function(err, projects) {
     if (err) {
       res.status(500).end("Could not find projects");
     } else {
-      console.log(projects);
       res.render("projectList", {projects: projects});
     }
   })
@@ -20,9 +20,7 @@ project.get("/", function(req, res) {
 
 project.get("/:id", function(req, res) {
   var projectId = req.params.id;
-  console.log(projectId);
   Project.findOne({"_id": projectId}).exec(function(err, project) {
-    console.log(project);
     if (err) {
       res.status(500).end("Error finding projects");
     } else {
@@ -35,9 +33,10 @@ project.post("/", function(req, res) {
   var creatorId = req.session.user._id;
   var defaultProject = {
     title: "New Project",
-    coverPhoto: "defaultImage.png", //TODO: Get an image.
+    coverPhoto: "http://www.trendycovers.com/covers/be_happy_facebook_cover_1366095017.jpg?i", //TODO: Get an image
     goals: "The goal of this project is to tell you what you should type here.",
     type: "public",
+    members: [creatorId],
     organizers: [creatorId],
     dateCreated: Date.now()
   }
@@ -56,7 +55,7 @@ project.put("/:id", function(req, res) {
   var projectId = updatedProject._id;
 
   Project.findOneAndUpdate(
-    {"_id": projectId}, 
+    {"_id": projectId},
     updatedProject,
     function(err, project){
       console.log(project);
