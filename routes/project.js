@@ -37,7 +37,7 @@ project.post("/", function(req, res) {
     goals: "The goal of this project is to tell you what you should type here.",
     galleryId: "72157623755425292", 
     type: "public",
-    calendarLink: "https://www.google.com/calendar/embed?src=4d8ao8d70avubj73u2ljehoq5o%40group.calendar.google.com&ctz=America/New_York&mode=AGENDA",
+    calendarLink: "https://www.google.com/calendar/embed?src=4d8ao8d70avubj73u2ljehoq5o%40group.calendar.google.com&ctz=America/New_York",
     members: [creatorId],
     organizers: [creatorId],
     dateCreated: Date.now()
