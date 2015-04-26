@@ -10,6 +10,7 @@ var argv = require('minimist')(process.argv.slice(2));
 
 var olinAuth = require('./routes/olinAuth');
 var project = require("./routes/project");
+var user = require("./routes/user");
 
 var app = express();
 
@@ -47,12 +48,13 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", olinAuth.getPublicUser, function(req, res) {
+app.get("/", user.getPublicUser, function(req, res) {
   res.render("index", {user: req.publicUser});
 });
 
-app.use("/project", olinAuth.isAuth, olinAuth.getPublicUser, project);
+app.use("/project", olinAuth.isAuth, user.getPublicUser, project);
 app.use("/olinAuth", olinAuth);
+app.use("/user", olinAuth.isAuth, user.getPublicUser, user)
 
 mongoose.connect(mongoURI);
 app.listen(PORT, function() {
