@@ -7,7 +7,7 @@ var User = require("../models/user");
 var router = express.Router();
 
 router.get("/login", function(req, res) {
-  res.redirect("http://www.olinapps.com/external?callback="+"http://localhost:3000/olinAuth/auth");
+  res.redirect("http://www.olinapps.com/external?callback="+"http://localhost:3000/olinAuth/auth"+"?req="+req.query.req);
 })
 
 router.get("/logout", function(req, res) {
@@ -16,6 +16,7 @@ router.get("/logout", function(req, res) {
 })
 
 router.post("/auth", function(req, res) {
+  var redirectUrl = req.query.req;
   request("http://www.olinapps.com/api/me?sessionid="+req.body.sessionid, function(err, response, body) {
     body = JSON.parse(body);
     User.findOne({"email": body.user.email}, function(err, user) {
@@ -25,7 +26,7 @@ router.post("/auth", function(req, res) {
         if (!user) {
           user = new User({
             name: body.user.name,
-            display: body.user.nickname,
+            displayName: body.user.nickname || body.user.name,
             email: body.user.email,
             year: body.user.year,
             profilePhoto: "www.olinapps.com"+body.user.thumbnail,
@@ -36,34 +37,23 @@ router.post("/auth", function(req, res) {
               res.status(500).end("Error saving users");
             } else {
               req.session.user = user;
-              res.redirect("/");
+              res.redirect(redirectUrl || "/");
             }
           })
         } else {
           req.session.user = user;
-          res.redirect("/")
+          res.redirect(redirectUrl || "/")
         }
       }
     });
   });
 })
 
-module.exports = router;
-
-module.exports.getPublicUser = function(req, res, next) {
-  if (req.session.user) {
-    var user = JSON.parse(JSON.stringify(req.session.user));
-    delete user._id;
-    req.publicUser = user;
-  }
-  return next();
-}
-
-module.exports.isAuth = function(req, res, next) {
+router.isAuth = function(req, res, next) {
   if (req.session.user) {
     return next();
   }
-
-
-  res.redirect("/olinAuth/login");
+  res.redirect("/olinAuth/login?req="+req.originalUrl);
 }
+
+module.exports = router;
