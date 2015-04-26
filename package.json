@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "sass": "./node_modules/node-sass/bin/node-sass -w -r scss/ -o ./public/styles/ style.css",
     "livereload": "./node_modules/livereload/bin/livereload.js .",
-    "build": "nodemon & npm run sass & npm run livereload"
+    "build": "nodemon & npm run sass"
   },
   "repository": {
     "type": "git",

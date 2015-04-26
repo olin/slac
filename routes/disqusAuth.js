@@ -1,7 +1,7 @@
 var CryptoJS = require("crypto-js");
 
-var DISQUS_SECRET = "12345";
-var DISQUS_PUBLIC = "asdf";
+var DISQUS_SECRET = process.env.DISQUS_SECRET || "";
+var DISQUS_PUBLIC = process.env.DISQUS_PUBLIC || "";
 
 module.exports =  disqusSignon(user) {
   var disqusData = {
