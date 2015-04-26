@@ -1,3 +1,9 @@
+var disqus_config = function () {
+  // The generated payload which authenticates users with Disqus
+  this.page.remote_auth_s3 = '<message> <hmac> <timestamp>';
+  this.page.api_key = 'public_api_key';
+}
+
 /* * * CONFIGURATION VARIABLES * * */
 var disqus_shortname = 'olinslac';
 
