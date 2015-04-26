@@ -50,6 +50,15 @@ router.post("/auth", function(req, res) {
 
 module.exports = router;
 
+module.exports.getPublicUser = function(req, res, next) {
+  if (req.session.user) {
+    var user = JSON.parse(JSON.stringify(req.session.user));
+    delete user._id;
+    req.publicUser = user;
+  }
+  return next();
+}
+
 module.exports.isAuth = function(req, res, next) {
   if (req.session.user) {
     return next();

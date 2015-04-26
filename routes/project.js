@@ -13,7 +13,7 @@ project.get("/", function(req, res) {
     if (err) {
       res.status(500).end("Could not find projects");
     } else {
-      res.render("projectList", {projects: projects});
+      res.render("projectList", {projects: projects, user: req.publicUser});
     }
   })
 });
@@ -24,7 +24,7 @@ project.get("/:id", function(req, res) {
     if (err) {
       res.status(500).end("Error finding projects");
     } else {
-      res.render("projectPage", {project: project});
+      res.render("projectPage", {project: project, user: req.publicUser});
     }
   })
 });
