@@ -20,7 +20,8 @@ var hbs = exphbs.create({
   defaultLayout: "main",
   // Specify helpers which are only registered on this instance. 
   helpers: {
-    json: function (context) { return JSON.stringify(context); }
+    json: function(context) { return JSON.stringify(context); },
+    debug: function(context) { console.log(context);}
   }
 });
 
@@ -46,11 +47,11 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", function(req, res) {
-  res.render("index");
+app.get("/", olinAuth.getPublicUser, function(req, res) {
+  res.render("index", {user: req.publicUser});
 });
 
-app.use("/project", olinAuth.isAuth, project);
+app.use("/project", olinAuth.isAuth, olinAuth.getPublicUser, project);
 app.use("/olinAuth", olinAuth);
 
 mongoose.connect(mongoURI);

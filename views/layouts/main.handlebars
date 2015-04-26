@@ -29,8 +29,12 @@
           <li><a href="#">Portfolio</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Profile</a></li>
+        {{#if user}}
+          <li><a href="/user/profile">{{user.name}}</a></li>
+          <li><a href="/olinAuth/logout">Logout<span class="sr-only">(current)</span></a></li>
+        {{else}}
           <li><a href="/olinAuth/login">Login<span class="sr-only">(current)</span></a></li>
+        {{/if}}
         </ul>
       </div>
     </div>
