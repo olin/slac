@@ -3,7 +3,7 @@ var CryptoJS = require("crypto-js");
 var DISQUS_SECRET = process.env.DISQUS_SECRET || "";
 var DISQUS_PUBLIC = process.env.DISQUS_PUBLIC || "";
 
-module.exports =  disqusSignon(user) {
+  var disqusSignon = function (user) {
   var disqusData = {
     id: user._id,
     username: user.name,
@@ -21,7 +21,7 @@ module.exports =  disqusSignon(user) {
    */
   var message = new Buffer(disqusStr).toString('base64');
 
-  /* 
+  /*
    * CryptoJS is required for hashing (included in dir)
    * https://code.google.com/p/crypto-js/
    */
@@ -33,3 +33,5 @@ module.exports =  disqusSignon(user) {
     auth: message + " " + hexsig + " " + timestamp
   };
 }
+
+module.exports = disqusSignon;

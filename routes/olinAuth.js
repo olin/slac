@@ -38,6 +38,7 @@ router.post("/auth", function(req, res) {
               res.status(500).end("Error saving users");
             } else {
               req.session.user = user;
+              disqusSignon(user);
               res.redirect(redirectUrl || "/");
             }
           })
