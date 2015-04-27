@@ -5,8 +5,8 @@ var DISQUS_PUBLIC = process.env.DISQUS_PUBLIC || "";
 
 module.exports =  disqusSignon(user) {
   var disqusData = {
-    id: user.id,
-    username: user.username,
+    id: user._id,
+    username: user.name,
     email: user.email
   };
 

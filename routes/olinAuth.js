@@ -1,6 +1,7 @@
 var express = require("express");
 var request = require("request");
 var mongoose = require("mongoose");
+var disqusSignon = require("./disqusAuth");
 
 var User = require("../models/user");
 
