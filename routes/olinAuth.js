@@ -17,6 +17,9 @@ router.get("/logout", function(req, res) {
 
 router.post("/auth", function(req, res) {
   var redirectUrl = req.query.req;
+  if (redirectUrl === "undefined") {
+    redirectUrl = "/"  
+  }
   request("http://www.olinapps.com/api/me?sessionid="+req.body.sessionid, function(err, response, body) {
     body = JSON.parse(body);
     User.findOne({"email": body.user.email}, function(err, user) {
@@ -37,12 +40,12 @@ router.post("/auth", function(req, res) {
               res.status(500).end("Error saving users");
             } else {
               req.session.user = user;
-              res.redirect(redirectUrl || "/");
+              res.redirect(redirectUrl);
             }
           })
         } else {
           req.session.user = user;
-          res.redirect(redirectUrl || "/")
+          res.redirect(redirectUrl)
         }
       }
     });
