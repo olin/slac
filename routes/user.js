@@ -9,12 +9,25 @@ router.get("/profile", function(req, res) {
 });
 
 router.getPublicUser = function(req, res, next) {
+
   if (req.session.user) {
     var user = JSON.parse(JSON.stringify(req.session.user));
-    delete user._id;
-    req.publicUser = user;
+
+    User.find({_id: user._id}).populate("projects")
+      .exec(function(err, foundUsers){
+        if(err) console.log("Can't give users their projects: " + err);
+        user = foundUsers[0];
+
+        delete user._id;
+
+        req.publicUser = user;
+
+        console.log(req.publicUser);
+        return next();
+    });
+  } else {
+    return next();
   }
-  return next();
 }
 
 module.exports = router;

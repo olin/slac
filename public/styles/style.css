@@ -2,7 +2,7 @@
  * google-material-color v1.1.0
  * https://github.com/danlevan/google-material-color
  */
-nav, button#button-to-edit, button#button-save-changes, div#project-cover-image, div#project-title, .contentWrapper, div#project-members, section.sectionTitle, div#project-calendar > #wrapper {
+nav, button#button-to-edit, button#button-save-changes, div#project-cover-image, div#project-title, .contentWrapper, div#project-members, section.sectionTitle, div#project-calendar > #wrapper, .profile-container, .profile-container > #photo, #profile-projects-list {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
 button#button-to-edit, button#button-save-changes {
@@ -12,11 +12,21 @@ button#button-to-edit:hover, button#button-save-changes:hover {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
 
-div#project-cover-image {
+.profile-container #description-wrapper {
+  width: -moz-max-content;
+  width: -webkit-max-content;
+  width: max-content; }
+
+.profile-container, .profile-container > #photo {
+  width: -moz-min-content;
+  width: -webkit-min-content;
+  width: min-content; }
+
+div#project-cover-image, .profile-container > #photo {
   overflow: hidden;
   position: relative; }
 
-div#project-cover-image > img {
+div#project-cover-image > img, .profile-container > #photo > img {
   position: absolute;
   left: -100%;
   right: -100%;
@@ -65,6 +75,9 @@ nav {
 
 [contenteditable="true"] {
   border: 4px dotted #F44336; }
+
+.hidden {
+  display: none; }
 
 #create-project {
   position: fixed;
@@ -231,3 +244,24 @@ div#project-description {
   div#project-description > article {
     font-weight: 14pt; }
 
+.profile-container {
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 20px;
+  max-width: 900px; }
+  .profile-container #description-wrapper {
+    text-align: left;
+    margin-left: 20px;
+    white-space: nowrap; }
+    .profile-container #description-wrapper > #organizations-list {
+      white-space: normal; }
+  .profile-container > #photo {
+    min-width: 120px;
+    min-height: 120px; }
+
+#profile-projects-list {
+  background-color: white;
+  padding: 20px; }
