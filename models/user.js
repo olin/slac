@@ -5,7 +5,9 @@ module.exports = mongoose.model("User", mongoose.Schema({
   "displayName" : String,
   "profilePhoto" : String,  // Image Url
   "email" : String,
-  "projects" : [{ type: mongoose.Schema.Types.ObjectId, ref: 'projects' }],
+
+  // QUESTION: Is this the correct way to ref something?
+  "projects" : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }],
   "organizations" : [{type: mongoose.Schema.Types.ObjectId,
     ref: 'organizations'}],
   "year": Number,

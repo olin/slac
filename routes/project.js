@@ -42,12 +42,26 @@ project.post("/", function(req, res) {
     organizers: [creatorId],
     dateCreated: Date.now()
   }
+
+
   var newProject = new Project(defaultProject);
   newProject.save(function(err) {
     if (err) {
       res.status(500).end("Error creating project");
     } else {
-      res.status(200).json({"_id": newProject._id});
+
+      // Also create a reference for the creator to have the project.
+      User.update({_id: creatorId },
+        {$push: {projects: newProject._id}},
+        {upsert:true}, 
+        function(err, data) {
+          if (err) {
+            console.log(err);
+            res.status(500).end("Error giving user reference."); 
+          } else {
+            res.status(200).json({"_id": newProject._id});
+          }
+      });
     }
   })
 });
