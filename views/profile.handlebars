@@ -15,6 +15,11 @@
 </div>
 
 <div id="profile-projects-list">
-    Projects: Under Construction
-    {{user.projects}}
+  <div id="user-projects">
+    {{#each user.projects}}
+      {{> projectListItem}}
+    {{/each}}
+  </div> 
+
+  <script src="/javascripts/projects.js"></script>
 </div>

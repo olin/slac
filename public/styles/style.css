@@ -2,7 +2,7 @@
  * google-material-color v1.1.0
  * https://github.com/danlevan/google-material-color
  */
-nav, button#button-to-edit, button#button-save-changes, div#project-cover-image, div#project-title, .contentWrapper, div#project-members, section.sectionTitle, div#project-calendar > #wrapper, .profile-container, .profile-container > #photo, #profile-projects-list {
+nav, .project-card, button#button-to-edit, button#button-save-changes, div#project-cover-image, div#project-title, .contentWrapper, div#project-members, section.sectionTitle, div#project-calendar > #wrapper, .profile-container, .profile-container > #photo, #profile-projects-list {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
 button#button-to-edit, button#button-save-changes {
@@ -89,10 +89,8 @@ nav {
   width: 100%; }
 
 .project-card {
-  width: 60%;
-  min-width: 320;
-  margin: 20px auto 0 auto;
-  border: 1px solid black; }
+  max-width: 600px;
+  margin: 20px auto 0 auto; }
 
 .cover-container {
   position: relative; }

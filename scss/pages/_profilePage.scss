@@ -41,4 +41,7 @@
   @extend %sh1;
   background-color: white;
   padding: 20px;
+  
+  & > #user-projects {
+  }
 }
