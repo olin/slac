@@ -8,25 +8,50 @@ var ObjectId = mongoose.Types.ObjectId;
 
 var project = express.Router();
 
+project.portfolioRequest = function(req, res, next) {
+  req.public = true;
+  next();
+};
+
 project.get("/", function(req, res) {
-  Project.find().populate("members").exec(function(err, projects) {
-    if (err) {
-      res.status(500).end("Could not find projects");
-    } else {
-      res.render("projectList", {projects: projects, user: req.publicUser});
-    }
-  })
+  if (req.public) {
+    Project.find({type:"portfolio"}).populate("members").exec(function(err, projects) {
+      if (err){
+        res.status(500).end("Could not find projects");
+      } else {
+        res.render("projectList", {projects: projects, buildPage: false});
+      }
+    });
+  } else {
+    Project.find().populate("members").exec(function(err, projects) {
+      if (err) {
+        res.status(500).end("Could not find projects");
+      } else {
+        res.render("projectList", {projects: projects, buildPage: true, user: req.publicUser});
+      }
+    });
+  }
 });
 
 project.get("/:id", function(req, res) {
   var projectId = req.params.id;
-  Project.findOne({"_id": projectId}).exec(function(err, project) {
-    if (err) {
-      res.status(500).end("Error finding projects");
-    } else {
-      res.render("projectPage", {project: project, user: req.publicUser});
-    }
-  })
+  if (req.public) {
+    Project.findOne({"_id": projectId, "type": "portfolio"}).exec(function(err, project) {
+      if (err) {
+        res.status(500).end("Error finding projects");
+      } else {
+        res.render("projectPage", {project: project, buildPage: false});
+      }
+    });
+  } else {
+    Project.findOne({"_id": projectId}).exec(function(err, project) {
+      if (err) {
+        res.status(500).end("Error finding projects");
+      } else {
+        res.render("projectPage", {project: project, user: req.publicUser, buildPage: true});
+      }
+    });
+  }
 });
 
 project.post("/", function(req, res) {

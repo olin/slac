@@ -48,11 +48,8 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", user.getPublicUser, function(req, res) {
-  res.render("index", {user: req.publicUser});
-});
-
 app.use("/project", olinAuth.isAuth, user.getPublicUser, project);
+app.use("/", project.portfolioRequest, project);
 app.use("/olinAuth", olinAuth);
 app.use("/user", olinAuth.isAuth, user.getPublicUser, user)
 
