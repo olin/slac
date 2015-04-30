@@ -103,7 +103,8 @@ project.post("/", function(req, res) {
     calendarLink: "https://www.google.com/calendar/embed?src=4d8ao8d70avubj73u2ljehoq5o%40group.calendar.google.com&ctz=America/New_York",
     members: [creatorId],
     organizers: [creatorId],
-    dateCreated: Date.now()
+    dateCreated: Date.now(),
+    type: "build"
   }
 
 
