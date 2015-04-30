@@ -1,8 +1,9 @@
 <div class="project-list-container">
-<button class="btn" id="create-project"> +Create</button>
-
+{{#if buildPage}}
+  <button class="btn" id="create-project"> +Create</button>
+{{/if}}
   {{#each projects}}
-    {{> projectListItem}}
+    {{> projectListItem buildPage=../buildPage}}
   {{/each}}
 </div>
 

@@ -1,0 +1,13 @@
+<a href="/projects/{{_id}}">
+  <div class="ideate-card">
+    <div class="cover-container">
+      <div class="project-title">{{title}}</div>
+      <div class="project-description">{{description}}</div>
+    </div>
+    <div class="project-info">
+      {{#each members}}
+      <img class="member-icon" src="http://{{profilePhoto}}"/>
+      {{/each}}
+    </div>
+  </div>
+</a>
