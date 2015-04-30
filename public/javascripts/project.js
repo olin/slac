@@ -67,3 +67,33 @@ $("#button-save-changes").click(function(){
   });
   location.reload();
 });
+
+$("#button-publish").click(function(){
+
+  var updatedProject = project;
+  updatedProject.type = "portfolio";
+
+  var url = "/project/" + project._id;
+  $.ajax({
+    url: url,
+    type: 'PUT',
+    data: updatedProject
+  });
+
+  window.location = "/portfolio/" + project._id;
+});
+
+$("#button-unpublish").click(function(){
+
+  var updatedProject = project;
+  updatedProject.type = "build";
+
+  var url = "/project/" + project._id;
+  $.ajax({
+    url: url,
+    type: 'PUT',
+    data: updatedProject
+  });
+
+  window.location = "/project/" + project._id;
+});

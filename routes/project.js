@@ -19,7 +19,7 @@ project.ideateRequest = function(req, res, next) {
 };
 
 project.get("/", function(req, res) {
-  if (req.projectType) {
+  if (req.projectType == "portfolio") {
     Project.find({"type":"portfolio"}).populate("members").exec(function(err, projects) {
       if (err){
         res.status(500).end("Could not find projects");
@@ -28,7 +28,8 @@ project.get("/", function(req, res) {
       }
     });
   } else {
-    Project.find().populate("members").exec(function(err, projects) {
+    Project.find({"type":"build"})
+    .populate("members").exec(function(err, projects) {
       if (err) {
         res.status(500).end("Could not find projects");
       } else {
@@ -48,22 +49,21 @@ project.get("/:id", function(req, res) {
     Project.findOne({"_id": projectId, "type": "portfolio"})
     .populate("members")
     .exec(function(err, project) {
-      // req.session.user._id;
-      // if (req.session.user._id  project.member)
-
-      project.members.forEach(function(member){
-        if (req.session.user._id == member._id) {
-          canEdit = true;
-        }
-      });
-
-      if (project.organizers.indexOf(req.session.user._id) >= 0) {
-        canPublish = true;
-      }
 
       if (err) {
         res.status(500).end("Error finding projects");
       } else {
+
+        project.members.forEach(function(member){
+          if (req.session.user._id == member._id) {
+            canEdit = true;
+          }
+        });
+
+        if (project.organizers.indexOf(req.session.user._id) >= 0) {
+          canPublish = true;
+        }
+
         res.render("projectPage", {project: project, buildPage: false, user: req.publicUser, canPublish: canPublish, canEdit: canEdit, canJoin: !canEdit});
       }
     });
@@ -72,24 +72,20 @@ project.get("/:id", function(req, res) {
     .populate("members")
     .exec(function(err, project) {
 
-      console.log("Session user: ");
-      console.log(req.session.user._id);
-
-      console.log("Members: ");
-      console.log(project.organizers);
-      project.members.forEach(function(member){
-        if (req.session.user._id == member._id) {
-          canEdit = true;
-        }
-      });
-      
-      if (project.organizers.indexOf(req.session.user._id) >= 0) {
-        canPublish = true;
-      }
-
       if (err) {
         res.status(500).end("Error finding projects");
       } else {
+
+        project.members.forEach(function(member){
+          if (req.session.user._id == member._id) {
+            canEdit = true;
+          }
+        });
+        
+        if (project.organizers.indexOf(req.session.user._id) >= 0) {
+          canPublish = true;
+        }
+        
         res.render("projectPage", {project: project, user: req.publicUser, buildPage: true, canPublish: canPublish, canEdit: canEdit, canJoin: !canEdit});
       }
     });
