@@ -15,6 +15,11 @@ router.get("/logout", function(req, res) {
   res.redirect("/");
 })
 
+router.get("/auth", function(req, res) {
+  // If you cancel olin authentication midway you will end up here.
+  res.redirect("/")
+});
+
 router.post("/auth", function(req, res) {
   var redirectUrl = req.query.req;
   if (redirectUrl === "undefined") {

@@ -1,12 +1,13 @@
-<a href="/project/{{_id}}">
+{{debug this}}
+<a href="{{#if buildPage}}/project{{else}}/portfolio{{/if}}/{{_doc._id}}">
   <div class="project-card">
     <div class="cover-container">
-      <img class="project-cover" src="{{coverPhoto}}">
-      <div class="project-title">{{title}}</div>
+      <img class="project-cover" src="{{_doc.coverPhoto}}">
+      <div class="project-title">{{_doc.title}}</div>
     </div>
     <div class="project-info">
-      {{#each members}}
-      <img class="member-icon" src="http://{{profilePhoto}}"/>
+      {{#each _doc.members}}
+      <img class="member-icon" src="http://{{_doc.profilePhoto}}"/>
       {{/each}}
     </div>
   </div>

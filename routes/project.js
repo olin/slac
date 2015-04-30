@@ -15,11 +15,11 @@ project.portfolioRequest = function(req, res, next) {
 
 project.get("/", function(req, res) {
   if (req.public) {
-    Project.find({type:"portfolio"}).populate("members").exec(function(err, projects) {
+    Project.find({"type":"portfolio"}).populate("members").exec(function(err, projects) {
       if (err){
         res.status(500).end("Could not find projects");
       } else {
-        res.render("projectList", {projects: projects, buildPage: false});
+        res.render("projectList", {projects: projects, buildPage: false, user: req.publicUser});
       }
     });
   } else {
@@ -40,7 +40,7 @@ project.get("/:id", function(req, res) {
       if (err) {
         res.status(500).end("Error finding projects");
       } else {
-        res.render("projectPage", {project: project, buildPage: false});
+        res.render("projectPage", {project: project, buildPage: false, user: req.publicUser});
       }
     });
   } else {

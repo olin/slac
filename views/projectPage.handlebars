@@ -3,9 +3,11 @@
   <div id="project-cover-image">
 
     {{!-- These are toggled buttons. --}}
+    {{#if buildPage}}
+    buildPage
     <button id="button-to-edit"><i class="fa fa-pencil"></i></button>
     <button id="button-save-changes" class="hidden"><i class="fa fa-floppy-o"></i></button>
-
+    {{/if}}
     <div id="project-title" class="can-edit-text">{{project.title}}</div>
     {{!-- TODO: Change this into uploaded dynamic canvas. --}}
     <img src="{{project.coverPhoto}}"></img>
@@ -28,7 +30,7 @@
       </iframe>
     </div>
   </div>
-
+  {{#if buildPage}}
   <div id="project-calendar">
     <section class="sectionTitle">Calendar</section>
 
@@ -37,7 +39,7 @@
       <iframe id="calendar-iframe" src="{{project.calendarLink}}&mode=AGENDA" style="border: 0" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
-
+  {{/if}}
   <div id="project-discussion-board">
     <section class="sectionTitle">Discussion</section>
     <div class="contentWrapper" id="disqus_thread"></div>
