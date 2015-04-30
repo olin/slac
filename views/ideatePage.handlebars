@@ -1,0 +1,15 @@
+  <div id="project-discussion-board">
+    <section class="sectionTitle">Discussion</section>
+    <div class="contentWrapper" id="disqus_thread"></div>
+  </div>
+
+</div>
+
+<script type="text/javascript">
+
+  /*Sort of a janky way of doing things, but I am getting our JSON object this
+  way through Handlebars.*/
+  var project = {{{json project}}};
+
+</script>
+<script src="/javascripts/disqus.js"></script>

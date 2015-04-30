@@ -9,7 +9,7 @@ var ObjectId = mongoose.Types.ObjectId;
 var project = express.Router();
 
 project.portfolioRequest = function(req, res, next) {
-  req.projectType = "portfolio";
+  req.projectType = "project";
   next();
 };
 
@@ -18,78 +18,49 @@ project.ideateRequest = function(req, res, next) {
   next();
 };
 
+project.buildRequest = function(req, res, next) {
+  req.projectType = "build";
+  req.buildPage = true;
+  next();
+}
+
 project.get("/", function(req, res) {
-  if (req.projectType == "portfolio") {
-    Project.find({"type":"portfolio"}).populate("members").exec(function(err, projects) {
-      if (err){
-        res.status(500).end("Could not find projects");
-      } else {
-        res.render("projectList", {projects: projects, buildPage: false, user: req.publicUser});
-      }
-    });
-  } else {
-    Project.find({"type":"build"})
-    .populate("members").exec(function(err, projects) {
-      if (err) {
-        res.status(500).end("Could not find projects");
-      } else {
-        res.render("projectList", {projects: projects, buildPage: true, user: req.publicUser});
-      }
-    });
-  }
+  Project.find({"type":req.projectType}).populate("members").exec(function(err, projects) {
+    if (err){
+      res.status(500).end("Could not find projects");
+    } else {
+      res.render(
+        (req.projectType === "build" ? "project" : req.projectType) + "List",
+         {projects: projects, buildPage: req.buildPage, user: req.publicUser});
+    }
+  });
 });
 
 project.get("/:id", function(req, res) {
-
   var canEdit = false;
   var canPublish = false;
-  
-  var projectId = req.params.id;
-  if (req.projectType === "portfolio") {
-    Project.findOne({"_id": projectId, "type": "portfolio"})
+
+  Project.findOne({"_id": req.params.id, "type": req.projectType})
     .populate("members")
     .exec(function(err, project) {
-
       if (err) {
         res.status(500).end("Error finding projects");
       } else {
-
         project.members.forEach(function(member){
-          if (req.session.user._id == member._id) {
+          if (req.session.user && req.session.user._id == member._id) {
             canEdit = true;
           }
         });
 
-        if (project.organizers.indexOf(req.session.user._id) >= 0) {
+        if (req.session.user && project.organizers.indexOf(req.session.user._id) >= 0) {
           canPublish = true;
         }
 
-        res.render("projectPage", {project: project, buildPage: false, user: req.publicUser, canPublish: canPublish, canEdit: canEdit, canJoin: !canEdit});
+        res.render(
+          (req.projectType === "build" ? "project" : req.projectType) + "Page",
+         {project: project, buildPage: req.buildPage, user: req.publicUser, canPublish: canPublish, canEdit: canEdit, canJoin: !canEdit});
       }
-    });
-  } else {
-    Project.findOne({"_id": projectId})
-    .populate("members")
-    .exec(function(err, project) {
-
-      if (err) {
-        res.status(500).end("Error finding projects");
-      } else {
-
-        project.members.forEach(function(member){
-          if (req.session.user._id == member._id) {
-            canEdit = true;
-          }
-        });
-        
-        if (project.organizers.indexOf(req.session.user._id) >= 0) {
-          canPublish = true;
-        }
-        
-        res.render("projectPage", {project: project, user: req.publicUser, buildPage: true, canPublish: canPublish, canEdit: canEdit, canJoin: !canEdit});
-      }
-    });
-  }
+  });
 });
 
 project.post("/", function(req, res) {
@@ -98,13 +69,13 @@ project.post("/", function(req, res) {
     title: "New Project",
     coverPhoto: "http://lorempixel.com/1200/400/",
     goals: "The goal of this project is to tell you what you should type here.",
+    description: "The description of this project is too good.",
     galleryId: "72157623755425292",
-    type: "public",
+    type: req.projectType,
     calendarLink: "https://www.google.com/calendar/embed?src=4d8ao8d70avubj73u2ljehoq5o%40group.calendar.google.com&ctz=America/New_York",
     members: [creatorId],
     organizers: [creatorId],
-    dateCreated: Date.now(),
-    type: "build"
+    dateCreated: Date.now()
   }
 
 
@@ -137,7 +108,6 @@ project.put("/:id", function(req, res) {
     {"_id": projectId},
     updatedProject,
     function(err, project){
-
       if (err) {
         res.status(500).end("Error finding projects");
       }
