@@ -25,7 +25,6 @@ project.buildRequest = function(req, res, next) {
 }
 
 project.get("/", function(req, res) {
-  console.log(req.projectType);
   Project.find({"type":req.projectType}).populate("members").exec(function(err, projects) {
     if (err){
       res.status(500).end("Could not find projects");
@@ -57,6 +56,7 @@ project.post("/", function(req, res) {
     title: "New Project",
     coverPhoto: "http://lorempixel.com/1200/400/",
     goals: "The goal of this project is to tell you what you should type here.",
+    description: "The description of this project is too good.",
     galleryId: "72157623755425292",
     type: req.projectType,
     calendarLink: "https://www.google.com/calendar/embed?src=4d8ao8d70avubj73u2ljehoq5o%40group.calendar.google.com&ctz=America/New_York",

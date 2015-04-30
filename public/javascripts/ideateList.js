@@ -1,5 +1,5 @@
-$("#create-ideate").click(function(e) {
-    $.post("/project", {}, function (data) {
-
+$("#create-project").click(function(e) {
+    $.post("/ideate", {}, function (data) {
+        window.location = "/ideate/" + data._id;
     });
 });
