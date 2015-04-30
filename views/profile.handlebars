@@ -17,8 +17,9 @@
 <div id="profile-projects-list">
   <div id="user-projects">
     {{#each user.projects}}
-      {{> projectListItem}}
+      {{> projectListItem projectType=../projectType}}
     {{/each}}
+    {{debug this}}
   </div> 
 
   <script src="/javascripts/projects.js"></script>

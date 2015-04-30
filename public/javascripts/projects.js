@@ -1,5 +1,5 @@
 $("#create-project").click(function(e) {
-    $.post("/project", {}, function (data) {
-        window.location = "/project/" + data._id;
+    $.post("/build", {}, function (data) {
+        window.location = "/build/" + data._id;
     });
 });

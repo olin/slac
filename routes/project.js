@@ -31,7 +31,8 @@ project.get("/", function(req, res) {
     } else {
       res.render(
         (req.projectType === "build" ? "project" : req.projectType) + "List",
-         {projects: projects, buildPage: req.buildPage, user: req.publicUser});
+         {projects: projects, buildPage: req.buildPage, user: req.publicUser, 
+            projectType: req.projectType === "project" ? "portfolio" : req.projectType});
     }
   });
 });
