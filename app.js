@@ -19,7 +19,7 @@ var mongoURI = process.env.MONGOURI || "mongodb://localhost/slac";
 
 var hbs = exphbs.create({
   defaultLayout: "main",
-  // Specify helpers which are only registered on this instance. 
+  // Specify helpers which are only registered on this instance.
   helpers: {
     json: function(context) { return JSON.stringify(context); },
     debug: function(context) { console.log(context);}
@@ -48,11 +48,10 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", user.getPublicUser, function(req, res) {
-  res.render("index", {user: req.publicUser});
-});
-
 app.use("/project", olinAuth.isAuth, user.getPublicUser, project);
+app.use("/", project.portfolioRequest, user.getPublicUser, project);
+app.use("/portfolio", project.portfolioRequest, user.getPublicUser, project)
+app.use("/ideate", project.ideateRequest, user.getPublicUser, project)
 app.use("/olinAuth", olinAuth);
 app.use("/user", olinAuth.isAuth, user.getPublicUser, user)
 

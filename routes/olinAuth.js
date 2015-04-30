@@ -10,7 +10,7 @@ var router = express.Router();
 router.get("/login", function(req, res) {
   res.redirect("http://www.olinapps.com/external?callback="
     + "http://" + req.headers.host
-    + "/olinAuth/auth" 
+    + "/olinAuth/auth"
     + "?req="+req.query.req);
 })
 
@@ -18,6 +18,11 @@ router.get("/logout", function(req, res) {
   req.session.user = null;
   res.redirect("/");
 })
+
+router.get("/auth", function(req, res) {
+  // If you cancel olin authentication midway you will end up here.
+  res.redirect("/")
+});
 
 router.post("/auth", function(req, res) {
   var redirectUrl = req.query.req;
