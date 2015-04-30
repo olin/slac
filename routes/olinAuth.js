@@ -7,7 +7,10 @@ var User = require("../models/user");
 var router = express.Router();
 
 router.get("/login", function(req, res) {
-  res.redirect("http://www.olinapps.com/external?callback="+"http://localhost:3000/olinAuth/auth"+"?req="+req.query.req);
+  res.redirect("http://www.olinapps.com/external?callback="
+    + "http://" + req.headers.host
+    + "/olinAuth/auth"
+    + "?req="+req.query.req);
 })
 
 router.get("/logout", function(req, res) {
@@ -23,7 +26,7 @@ router.get("/auth", function(req, res) {
 router.post("/auth", function(req, res) {
   var redirectUrl = req.query.req;
   if (redirectUrl === "undefined") {
-    redirectUrl = "/"  
+    redirectUrl = "/"
   }
   request("http://www.olinapps.com/api/me?sessionid="+req.body.sessionid, function(err, response, body) {
     body = JSON.parse(body);
