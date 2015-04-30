@@ -9,7 +9,7 @@ router.get("/profile/", function(req, res) {
 });
 
 router.get("/profile/:id", function(req, res) {
-  User.find({_id: req.params.id}).exec(function(err, foundUsers) {
+  User.find({_id: req.params.id}).populate("projects").exec(function(err, foundUsers) {
     var chosenUser = foundUsers[0];
     res.render("profile", {user: chosenUser});
   });

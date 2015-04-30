@@ -3,7 +3,7 @@
   <button class="btn" id="create-project"> +Create</button>
 {{/if}}
   {{#each projects}}
-    {{> projectListItem buildPage=../buildPage}}
+    {{> projectListItem projectType=../projectType}}
   {{/each}}
 </div>
 
