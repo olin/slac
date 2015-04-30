@@ -6,6 +6,7 @@ var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 var mongoose = require("mongoose");
 var session = require('express-session');
+var favicon = require('serve-favicon');
 var argv = require('minimist')(process.argv.slice(2));
 
 var olinAuth = require('./routes/olinAuth');
@@ -36,7 +37,6 @@ console.dlog = function(message) {
       console.log(">>", message, args.join(','));
   }
 };
-
 app.use(logger(argv.debug ? "dev" : "tiny"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -47,6 +47,7 @@ app.use(session({
   saveUninitialized: true
 }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 app.use("/olinAuth", olinAuth);
 app.use("/build", project.buildRequest, olinAuth.isAuth, user.getPublicUser, project);
