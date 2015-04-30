@@ -8,7 +8,7 @@ var router = express.Router();
 
 router.get("/login", function(req, res) {
   res.redirect("http://www.olinapps.com/external?callback="
-    + "http://" + request.headers.host
+    + "http://" + req.headers.host
     + "/olinAuth/auth" 
     + "?req="+req.query.req);
 })
