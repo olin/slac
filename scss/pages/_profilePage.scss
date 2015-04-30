@@ -1,0 +1,47 @@
+.profile-container {
+  background-color: white;
+  @extend %sh1;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 20px;
+
+  max-width: 900px;
+
+  @extend %min-content;
+
+  #description-wrapper {
+    text-align: left;
+    margin-left: 20px;
+
+    @extend %max-content;
+    white-space: nowrap;
+
+    & > #organizations-list {
+      white-space: normal;
+    } 
+  }
+  & > #photo {
+    min-width: 120px;
+    min-height: 120px;
+    @extend %centerImageWrapper;
+    @extend %sh1;
+    // width: min-content;
+
+    @extend %min-content;
+    
+    & > img {
+      @extend %centerImage;
+    }
+  }
+}
+
+#profile-projects-list {
+  @extend %sh1;
+  background-color: white;
+  padding: 20px;
+  
+  & > #user-projects {
+  }
+}

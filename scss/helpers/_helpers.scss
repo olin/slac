@@ -3,6 +3,18 @@
   height: 100%;
 }
 
+%max-content {
+  width: -moz-max-content;
+  width: -webkit-max-content;
+  width: max-content;
+}
+
+%min-content {
+  width: -moz-min-content;
+  width: -webkit-min-content;
+  width: min-content;
+}
+
 %centerImageWrapper {
   overflow: hidden;
   position: relative;

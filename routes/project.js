@@ -72,6 +72,8 @@ project.post("/", function(req, res) {
     organizers: [creatorId],
     dateCreated: Date.now()
   }
+
+
   var newProject = new Project(defaultProject);
   newProject.save(function(err) {
     if (err) {
