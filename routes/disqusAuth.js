@@ -3,11 +3,12 @@ var CryptoJS = require("crypto-js");
 var DISQUS_SECRET = process.env.DISQUS_SECRET || "";
 var DISQUS_PUBLIC = process.env.DISQUS_PUBLIC || "";
 
-  var disqusSignon = function (user) {
+var disqusSignon = function (user) {
   var disqusData = {
     id: user._id,
     username: user.name,
-    email: user.email
+    email: user.email,
+    avatar: user.profilePhoto
   };
 
   var disqusStr = JSON.stringify(disqusData);
@@ -27,10 +28,9 @@ var DISQUS_PUBLIC = process.env.DISQUS_PUBLIC || "";
    */
   var result = CryptoJS.HmacSHA1(message + " " + timestamp, DISQUS_SECRET);
   var hexsig = CryptoJS.enc.Hex.stringify(result);
-
   return {
-    pubKey: DISQUS_PUBLIC,
-    auth: message + " " + hexsig + " " + timestamp
+    api_key: DISQUS_PUBLIC,
+    remote_auth_s3: message + " " + hexsig + " " + timestamp
   };
 }
 

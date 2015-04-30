@@ -41,18 +41,23 @@ router.post("/auth", function(req, res) {
               res.status(500).end("Error saving users");
             } else {
               req.session.user = user;
-              disqusSignon(user);
+              req.session.disqus = disqusSignon(user);
               res.redirect(redirectUrl);
             }
           })
         } else {
           req.session.user = user;
+          req.session.disqus = disqusSignon(user);
           res.redirect(redirectUrl)
         }
       }
     });
   });
 })
+
+router.get("/disqus", function(req, res) {
+  res.status(200).json(req.session.disqus);
+});
 
 router.isAuth = function(req, res, next) {
   if (req.session.user) {
