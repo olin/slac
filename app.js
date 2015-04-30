@@ -48,12 +48,12 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/project", olinAuth.isAuth, user.getPublicUser, project);
-app.use("/", project.portfolioRequest, user.getPublicUser, project);
+app.use("/build", project.buildRequest, olinAuth.isAuth, user.getPublicUser, project);
 app.use("/portfolio", project.portfolioRequest, user.getPublicUser, project)
 app.use("/ideate", project.ideateRequest, user.getPublicUser, project)
 app.use("/olinAuth", olinAuth);
 app.use("/user", olinAuth.isAuth, user.getPublicUser, user)
+app.use("/", project.buildRequest, user.getPublicUser, project);
 
 mongoose.connect(mongoURI);
 app.listen(PORT, function() {

@@ -9,7 +9,7 @@ var ObjectId = mongoose.Types.ObjectId;
 var project = express.Router();
 
 project.portfolioRequest = function(req, res, next) {
-  req.projectType = "portfolio";
+  req.projectType = "project";
   next();
 };
 
@@ -18,49 +18,37 @@ project.ideateRequest = function(req, res, next) {
   next();
 };
 
+project.buildRequest = function(req, res, next) {
+  req.projectType = "build";
+  req.buildPage = true;
+  next();
+}
+
 project.get("/", function(req, res) {
-  if (req.projectType) {
-    Project.find({"type":"portfolio"}).populate("members").exec(function(err, projects) {
-      if (err){
-        res.status(500).end("Could not find projects");
-      } else {
-        res.render("projectList", {projects: projects, buildPage: false, user: req.publicUser});
-      }
-    });
-  } else {
-    Project.find().populate("members").exec(function(err, projects) {
-      if (err) {
-        res.status(500).end("Could not find projects");
-      } else {
-        res.render("projectList", {projects: projects, buildPage: true, user: req.publicUser});
-      }
-    });
-  }
+  console.log(req.projectType);
+  Project.find({"type":req.projectType}).populate("members").exec(function(err, projects) {
+    if (err){
+      res.status(500).end("Could not find projects");
+    } else {
+      res.render(
+        (req.projectType === "build" ? "project" : req.projectType) + "List",
+         {projects: projects, buildPage: req.buildPage, user: req.publicUser});
+    }
+  });
 });
 
 project.get("/:id", function(req, res) {
-  var projectId = req.params.id;
-  if (req.projectType === "portfolio") {
-    Project.findOne({"_id": projectId, "type": "portfolio"})
-    .populate("members")
-    .exec(function(err, project) {
-      if (err) {
-        res.status(500).end("Error finding projects");
-      } else {
-        res.render("projectPage", {project: project, buildPage: false, user: req.publicUser});
-      }
-    });
-  } else {
-    Project.findOne({"_id": projectId})
-    .populate("members")
-    .exec(function(err, project) {
-      if (err) {
-        res.status(500).end("Error finding projects");
-      } else {
-        res.render("projectPage", {project: project, user: req.publicUser, buildPage: true});
-      }
-    });
-  }
+  Project.findOne({"_id": req.params.id, "type": req.projectType})
+  .populate("members")
+  .exec(function(err, project) {
+    if (err) {
+      res.status(500).end("Error finding projects");
+    } else {
+      res.render(
+        (req.projectType === "build" ? "project" : req.projectType) + "Page",
+       {project: project, buildPage: req.buildPage, user: req.publicUser});
+    }
+  });
 });
 
 project.post("/", function(req, res) {
@@ -70,7 +58,7 @@ project.post("/", function(req, res) {
     coverPhoto: "http://lorempixel.com/1200/400/",
     goals: "The goal of this project is to tell you what you should type here.",
     galleryId: "72157623755425292",
-    type: "public",
+    type: req.projectType,
     calendarLink: "https://www.google.com/calendar/embed?src=4d8ao8d70avubj73u2ljehoq5o%40group.calendar.google.com&ctz=America/New_York",
     members: [creatorId],
     organizers: [creatorId],
@@ -107,8 +95,6 @@ project.put("/:id", function(req, res) {
     {"_id": projectId},
     updatedProject,
     function(err, project){
-      console.log(project);
-
       if (err) {
         res.status(500).end("Error finding projects");
       }
