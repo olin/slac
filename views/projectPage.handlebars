@@ -14,7 +14,15 @@
 
   </div>
 
-  <div id="project-members">Under Construction: Project Members</div>
+  <div id="project-members">
+    {{#each project.members }}
+      <span class="members-image-wrapper">
+        <a href="/user/profile/{{ _id }}">
+          <img src="http://{{ profilePhoto }}" title="{{ name }}"></img>
+        </a>
+      </span>
+    {{/each }}
+  </div>
 
   <div id="project-description">
     <section class="sectionTitle">Description and Goals</section>

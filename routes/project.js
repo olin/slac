@@ -41,7 +41,9 @@ project.get("/", function(req, res) {
 project.get("/:id", function(req, res) {
   var projectId = req.params.id;
   if (req.projectType === "portfolio") {
-    Project.findOne({"_id": projectId, "type": "portfolio"}).exec(function(err, project) {
+    Project.findOne({"_id": projectId, "type": "portfolio"})
+    .populate("members")
+    .exec(function(err, project) {
       if (err) {
         res.status(500).end("Error finding projects");
       } else {
@@ -49,7 +51,9 @@ project.get("/:id", function(req, res) {
       }
     });
   } else {
-    Project.findOne({"_id": projectId}).exec(function(err, project) {
+    Project.findOne({"_id": projectId})
+    .populate("members")
+    .exec(function(err, project) {
       if (err) {
         res.status(500).end("Error finding projects");
       } else {

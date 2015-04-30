@@ -1,0 +1,20 @@
+div#project-members {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+span.members-image-wrapper {
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
+  margin-right: -4px;
+  @extend %sh1;
+  transition: 0.1s ease-in-out;
+
+  &:hover {
+    @extend %sh3;
+    cursor: pointer;
+    @include scale(1.1);
+  }
+}
