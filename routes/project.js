@@ -39,25 +39,58 @@ project.get("/", function(req, res) {
 });
 
 project.get("/:id", function(req, res) {
+
+  var canEdit = false;
+  var canPublish = false;
+  
   var projectId = req.params.id;
   if (req.projectType === "portfolio") {
     Project.findOne({"_id": projectId, "type": "portfolio"})
     .populate("members")
     .exec(function(err, project) {
+      // req.session.user._id;
+      // if (req.session.user._id  project.member)
+
+      project.members.forEach(function(member){
+        if (req.session.user._id == member._id) {
+          canEdit = true;
+        }
+      });
+
+      if (project.organizers.indexOf(req.session.user._id) >= 0) {
+        canPublish = true;
+      }
+
       if (err) {
         res.status(500).end("Error finding projects");
       } else {
-        res.render("projectPage", {project: project, buildPage: false, user: req.publicUser});
+        res.render("projectPage", {project: project, buildPage: false, user: req.publicUser, canPublish: canPublish, canEdit: canEdit, canJoin: !canEdit});
       }
     });
   } else {
     Project.findOne({"_id": projectId})
     .populate("members")
     .exec(function(err, project) {
+
+      console.log("Session user: ");
+      console.log(req.session.user._id);
+
+      console.log("Members: ");
+      console.log(project.organizers);
+      project.members.forEach(function(member){
+        if (req.session.user._id == member._id) {
+          canEdit = true;
+        }
+      });
+      
+      if (project.organizers.indexOf(req.session.user._id) >= 0) {
+        canPublish = true;
+      }
+
       if (err) {
         res.status(500).end("Error finding projects");
       } else {
-        res.render("projectPage", {project: project, user: req.publicUser, buildPage: true});
+        res.render("projectPage", {project: project, user: req.publicUser, buildPage: true, canPublish: canPublish, canEdit: canEdit, canJoin: !canEdit});
       }
     });
   }
@@ -107,7 +140,6 @@ project.put("/:id", function(req, res) {
     {"_id": projectId},
     updatedProject,
     function(err, project){
-      console.log(project);
 
       if (err) {
         res.status(500).end("Error finding projects");
