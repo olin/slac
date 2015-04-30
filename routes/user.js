@@ -4,8 +4,15 @@ var User = require("../models/user");
 
 var router = express.Router();
 
-router.get("/profile", function(req, res) {
+router.get("/profile/", function(req, res) {
   res.render("profile", {user: req.publicUser});
+});
+
+router.get("/profile/:id", function(req, res) {
+  User.find({_id: req.params.id}).exec(function(err, foundUsers) {
+    var chosenUser = foundUsers[0];
+    res.render("profile", {user: chosenUser});
+  });
 });
 
 router.getPublicUser = function(req, res, next) {

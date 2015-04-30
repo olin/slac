@@ -20,10 +20,15 @@ project.get("/", function(req, res) {
 
 project.get("/:id", function(req, res) {
   var projectId = req.params.id;
-  Project.findOne({"_id": projectId}).exec(function(err, project) {
+  Project.findOne({"_id": projectId})
+  // QUESTION: How should the indention here be handled?
+  .populate("members")
+  .exec(function(err, project) {
     if (err) {
       res.status(500).end("Error finding projects");
     } else {
+      console.log("Project: ");
+      console.log(project);
       res.render("projectPage", {project: project, user: req.publicUser});
     }
   })

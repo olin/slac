@@ -2,11 +2,14 @@
  * google-material-color v1.1.0
  * https://github.com/danlevan/google-material-color
  */
-nav, .project-card, button#button-to-edit, button#button-save-changes, div#project-cover-image, div#project-title, .contentWrapper, div#project-members, section.sectionTitle, div#project-calendar > #wrapper, .profile-container, .profile-container > #photo, #profile-projects-list {
+nav, .project-card, button#button-to-edit, button#button-save-changes, span.members-image-wrapper, div#project-cover-image, div#project-title, .contentWrapper, div#project-members, section.sectionTitle, div#project-calendar > #wrapper, .profile-container, .profile-container > #photo, #profile-projects-list {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
 button#button-to-edit, button#button-save-changes {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+
+span.members-image-wrapper:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
 
 button#button-to-edit:hover, button#button-save-changes:hover {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -186,6 +189,25 @@ button#button-to-edit, button#button-save-changes {
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
     color: #ffffff;
     background-color: #1E88E5; } }
+
+div#project-members {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  white-space: nowrap; }
+
+span.members-image-wrapper {
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
+  margin-right: -4px;
+  transition: 0.1s ease-in-out; }
+  span.members-image-wrapper:hover {
+    cursor: pointer;
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1); }
 
 div#project-container {
   margin: 0px auto;
