@@ -3,12 +3,16 @@ div#project-container {
   text-align:left;
 }
 
-%edit-save-button {
+div#buttons-container {
   position: absolute;
   z-index: 9;
   right: 20px;
   top: 20px;
+  @extend min-content;
 
+}
+
+%edit-save-button {
   @extend %sh2;
 
   &:hover {
@@ -30,6 +34,28 @@ button#button-save-changes {
 
   background-color: palette(Green);
   color: white;
+}
+
+button#button-join {
+  @extend %round-button;
+  @extend %edit-save-button;
+
+  background-color: palette(Blue);
+
+}
+
+button#button-publish {
+  @extend %round-button;
+  @extend %edit-save-button;
+  
+  background-color: palette(Purple);
+  text-decoration: line-through;
+}
+
+button#button-unpublish {
+  @extend button#button-publish;
+  
+  background-color: palette(Purple);
 }
 
 div#project-cover-image {

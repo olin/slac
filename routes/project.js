@@ -37,16 +37,29 @@ project.get("/", function(req, res) {
 });
 
 project.get("/:id", function(req, res) {
+  var canEdit = false;
+  var canPublish = false;
+
   Project.findOne({"_id": req.params.id, "type": req.projectType})
-  .populate("members")
-  .exec(function(err, project) {
-    if (err) {
-      res.status(500).end("Error finding projects");
-    } else {
-      res.render(
-        (req.projectType === "build" ? "project" : req.projectType) + "Page",
-       {project: project, buildPage: req.buildPage, user: req.publicUser});
-    }
+    .populate("members")
+    .exec(function(err, project) {
+      if (err) {
+        res.status(500).end("Error finding projects");
+      } else {
+        project.members.forEach(function(member){
+          if (req.session.user && req.session.user._id == member._id) {
+            canEdit = true;
+          }
+        });
+
+        if (req.session.user && project.organizers.indexOf(req.session.user._id) >= 0) {
+          canPublish = true;
+        }
+
+        res.render(
+          (req.projectType === "build" ? "project" : req.projectType) + "Page",
+         {project: project, buildPage: req.buildPage, user: req.publicUser, canPublish: canPublish, canEdit: canEdit, canJoin: !canEdit});
+      }
   });
 });
 

@@ -51,7 +51,7 @@ $("#button-save-changes").click(function(){
   var updatedProject = project;
   updatedProject.title = $('#project-title').text();
   updatedProject.description = $('#project-description > article').html();
-  
+
   $(".show-on-edit").each(function(index) {
     var field = $(this).data("field");
     updatedProject[field] = $(this).text();
@@ -59,11 +59,41 @@ $("#button-save-changes").click(function(){
 
   // Send information over.
   // TODO: If there is an error saving, we should reflect that here.
-  var url = "/project/" + project._id;
+  var url = "/build/" + project._id;
   $.ajax({
     url: url,
     type: 'PUT',
     data: updatedProject
   });
   location.reload();
+});
+
+$("#button-publish").click(function(){
+
+  var updatedProject = project;
+  updatedProject.type = "project";
+
+  var url = "/build/" + project._id;
+  $.ajax({
+    url: url,
+    type: 'PUT',
+    data: updatedProject
+  });
+
+  window.location = "/portfolio/" + project._id;
+});
+
+$("#button-unpublish").click(function(){
+
+  var updatedProject = project;
+  updatedProject.type = "build";
+
+  var url = "/build/" + project._id;
+  $.ajax({
+    url: url,
+    type: 'PUT',
+    data: updatedProject
+  });
+
+  window.location = "/build/" + project._id;
 });

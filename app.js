@@ -53,7 +53,7 @@ app.use("/build", project.buildRequest, olinAuth.isAuth, user.getPublicUser, pro
 app.use("/portfolio", project.portfolioRequest, user.getPublicUser, project)
 app.use("/ideate", project.ideateRequest, olinAuth.isAuth, user.getPublicUser, project)
 app.use("/user", olinAuth.isAuth, user.getPublicUser, user)
-app.use("/", project.buildRequest, user.getPublicUser, project);
+app.use("/", project.portfolioRequest, user.getPublicUser, project);
 
 mongoose.connect(mongoURI);
 app.listen(PORT, function() {

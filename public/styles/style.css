@@ -2,16 +2,16 @@
  * google-material-color v1.1.0
  * https://github.com/danlevan/google-material-color
  */
-nav, .project-card, button#button-to-edit, button#button-save-changes, span.members-image-wrapper, div#project-cover-image, div#project-title, .contentWrapper, div#project-members, section.sectionTitle, div#project-calendar > #wrapper, .profile-container, .profile-container > #photo, #profile-projects-list {
+nav, .project-card, button#button-to-edit, button#button-save-changes, button#button-join, button#button-publish, button#button-unpublish, span.members-image-wrapper, div#project-cover-image, div#project-title, .contentWrapper, div#project-members, section.sectionTitle, div#project-calendar > #wrapper, .profile-container, .profile-container > #photo, #profile-projects-list {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
-button#button-to-edit, button#button-save-changes {
+button#button-to-edit, button#button-save-changes, button#button-join, button#button-publish, button#button-unpublish {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
 
 span.members-image-wrapper:hover {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
 
-button#button-to-edit:hover, button#button-save-changes:hover {
+button#button-to-edit:hover, button#button-save-changes:hover, button#button-join:hover, button#button-publish:hover, button#button-unpublish:hover {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
 
@@ -132,7 +132,7 @@ nav {
   width: 70px;
   height: auto; }
 
-button#button-to-edit, button#button-save-changes {
+button#button-to-edit, button#button-save-changes, button#button-join, button#button-publish, button#button-unpublish {
   display: block;
   width: 56px;
   height: 56px;
@@ -144,7 +144,7 @@ button#button-to-edit, button#button-save-changes {
   font-size: 25px;
   margin-bottom: 20px;
   transition: 0.1s ease-in-out; }
-  button#button-to-edit:hover, button#button-save-changes:hover {
+  button#button-to-edit:hover, button#button-save-changes:hover, button#button-join:hover, button#button-publish:hover, button#button-unpublish:hover {
     -webkit-transform: rotate(10deg);
     transform: rotate(10deg);
     cursor: pointer; }
@@ -213,7 +213,7 @@ div#project-container {
   margin: 0px auto;
   text-align: left; }
 
-button#button-to-edit, button#button-save-changes {
+div#buttons-container {
   position: absolute;
   z-index: 9;
   right: 20px;
@@ -226,6 +226,16 @@ button#button-to-edit {
 button#button-save-changes {
   background-color: #4CAF50;
   color: white; }
+
+button#button-join {
+  background-color: #2196F3; }
+
+button#button-publish, button#button-unpublish {
+  background-color: #9C27B0;
+  text-decoration: line-through; }
+
+button#button-unpublish {
+  background-color: #9C27B0; }
 
 div#project-cover-image {
   width: 100%;
