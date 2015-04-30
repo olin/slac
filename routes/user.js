@@ -29,7 +29,6 @@ router.getPublicUser = function(req, res, next) {
 
         req.publicUser = user;
 
-        console.log(req.publicUser);
         return next();
     });
   } else {
